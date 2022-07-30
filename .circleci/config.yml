@@ -16,11 +16,13 @@ jobs:
             - v1-deps
       - run:
           name: Install Dependencies
-          command: yarn install --frozen-lockfile
+          command: npm ci
       - save_cache:
           key: v1-deps-{{ .Branch }}-{{ checksum "package.json" }}
+          # cache NPM modules and the folder with the Cypress binary
           paths:
-            - ~/.cache ## cache both yarn and Cypress!
+            - ~/.npm
+            - ~/.cache
       - run: npm install -g wait-on
-      - run: yarn start & wait-on http://localhost:3000
-      - run: $(yarn bin)/cypress run --record --key <record_key>
+      - run: npm start & wait-on http://localhost:3000
+      - run: $(npm bin)/cypress run --record --key <record_key>
