@@ -1,9 +1,10 @@
+import React from "react";
+import { Col, Row } from "react-materialize";
+import RestaurantListPage from "./Components/RestaurantListPage";
 // import { useState } from "react";
 // import NewMessageForm from "./NewMessageForm";
 // import MessageList from "./MessageList";
-import React from "react";
 // import NewResturantForm from "./Components/NewRestaurantForm";
-import RestaurantListPage from "./Components/RestaurantListPage";
 
 export default function App() {
   // const [messages, setMessages] = useState([]);
@@ -11,11 +12,13 @@ export default function App() {
   //   setMessages([newMessage, ...messages]);
   // }
   return (
-    <>
+    <Row>
       {/* <NewMessageForm onSend={handleSend} />
       <MessageList data={messages} /> */}
-      <RestaurantListPage />
+      <Col s={12} m={10} l={8} offset="m1 l2">
+        <RestaurantListPage />
+      </Col>
       {/* <NewResturantForm /> */}
-    </>
+    </Row>
   );
 }

@@ -1,37 +1,39 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
+import { Button, Row } from "react-materialize";
 import NewResturantForm from "./NewRestaurantForm";
 import RestaurantList from "./RestaurantList";
 
-export default class RestaurantListPage extends Component {
-  state = { restaurantNames: [], showRestaurantForm: false };
+const RestaurantListPage = () => {
+  const [restaurantNames, setRestaurantNames] = useState([]);
+  const [showRestaurantForm, setShowRestaurantForm] = useState(false);
 
-  handleShowNewRestaurantForm = () => {
-    this.setState({ showRestaurantForm: true });
+  const handleShowNewRestaurantForm = () => {
+    setShowRestaurantForm(true);
   };
 
-  handleAddRestaurant = (newRestaurantName) => {
-    this.setState((state) => ({
-      showRestaurantForm: false,
-      restaurantNames: [newRestaurantName, ...state.restaurantNames],
-    }));
+  const handleAddRestaurant = (newRestaurantName) => {
+    setShowRestaurantForm(false);
+    setRestaurantNames([newRestaurantName, ...restaurantNames]);
   };
 
-  render() {
-    const { restaurantNames, showRestaurantForm } = this.state;
-
-    return (
-      <div>
-        <button
+  return (
+    <>
+      <Row>
+        <Button
           data-testid="addRestaurantButton"
-          onClick={this.handleShowNewRestaurantForm}
+          onClick={handleShowNewRestaurantForm}
         >
           Add Restaurant
-        </button>
+        </Button>
+      </Row>
+      <Row>
         {showRestaurantForm ? (
-          <NewResturantForm onSave={this.handleAddRestaurant} />
+          <NewResturantForm onSave={handleAddRestaurant} />
         ) : null}
         <RestaurantList restaurantNames={restaurantNames} />
-      </div>
-    );
-  }
-}
+      </Row>
+    </>
+  );
+};
+
+export default RestaurantListPage;
