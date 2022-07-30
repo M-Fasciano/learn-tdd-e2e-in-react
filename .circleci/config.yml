@@ -24,4 +24,4 @@ jobs:
             - ~/.npm
             - ~/.cache
       - run: npm install -g wait-on
-      - run: cd bin/cypress
+      - run: bin/cypress
